@@ -1,0 +1,273 @@
+rules:
+  - id: "keep-prs-scoped"
+    name: "Keep PRs scoped to the stated change"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Do not include unrelated refactors, formatting churn, or cleanup outside the PR’s feature/fix scope."
+    llm:
+      prompt: "Do not include unrelated refactors, formatting churn, or cleanup outside the PR’s feature/fix scope."
+  - id: "avoid-whitespace-churn"
+    name: "Avoid whitespace-only churn in untouched code"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Do not change indentation or whitespace in unaffected lines unless the PR is explicitly a formatting change."
+    llm:
+      prompt: "Do not change indentation or whitespace in unaffected lines unless the PR is explicitly a formatting change."
+  - id: "follow-cpp-naming-conventions"
+    name: "Follow C++ naming conventions"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Use snake_case for C++ symbols and reserve the p_ prefix for function parameters only."
+    llm:
+      prompt: "Use snake_case for C++ symbols and reserve the p_ prefix for function parameters only."
+  - id: "prefer-forward-declarations"
+    name: "Prefer forward declarations in headers"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "In headers, forward-declare types when possible and avoid unnecessary includes."
+    llm:
+      prompt: "In headers, forward-declare types when possible and avoid unnecessary includes."
+  - id: "never-include-cpp-files"
+    name: "Never include implementation files"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Do not include .cpp files from other compilation units; include the proper headers instead."
+    llm:
+      prompt: "Do not include .cpp files from other compilation units; include the proper headers instead."
+  - id: "prefer-const-ref-iteration"
+    name: "Prefer const references in iteration"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "Use const references for non-trivial types in range/iteration loops unless mutation or by-value semantics are required."
+    llm:
+      prompt: "Use const references for non-trivial types in range/iteration loops unless mutation or by-value semantics are required."
+  - id: "use-project-native-types-and-helpers"
+    name: "Use project-native types and helpers"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Prefer established engine containers, StringName helpers, and utility APIs over ad-hoc alternatives or manual reimplementations when equivalents exist."
+    llm:
+      prompt: "Prefer established engine containers, StringName helpers, and utility APIs over ad-hoc alternatives or manual reimplementations when equivalents exist."
+  - id: "avoid-unnecessary-copies-and-lookups"
+    name: "Avoid unnecessary copies and repeated lookups"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "Avoid avoidable container/string copies and cache repeated expensive settings/class lookups inside loops or hot paths."
+    llm:
+      prompt: "Avoid avoidable container/string copies and cache repeated expensive settings/class lookups inside loops or hot paths."
+  - id: "avoid-hot-path-allocations"
+    name: "Avoid per-frame allocations in hot paths"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "Do not allocate temporary objects each frame in frequently called runtime paths; reuse storage or pass output buffers."
+    llm:
+      prompt: "Do not allocate temporary objects each frame in frequently called runtime paths; reuse storage or pass output buffers."
+  - id: "reserve-capacity-before-bulk-insert"
+    name: "Reserve container capacity for bulk inserts"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "Call reserve() when final container size is known before pushing many elements."
+    llm:
+      prompt: "Call reserve() when final container size is known before pushing many elements."
+  - id: "avoid-const-cast-for-convenience"
+    name: "Do not cast away constness for convenience"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Do not use const_cast to mutate from const methods unless unavoidable; prefer correct mutability design."
+    llm:
+      prompt: "Do not use const_cast to mutate from const methods unless unavoidable; prefer correct mutability design."
+  - id: "mark-file-local-helpers-static"
+    name: "Mark file-local helpers static"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Declare free helper functions as static when used only within one .cpp file."
+    llm:
+      prompt: "Declare free helper functions as static when used only within one .cpp file."
+  - id: "prefer-direct-returns"
+    name: "Prefer direct return expressions"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Return computed expressions directly instead of assigning to unnecessary temporaries."
+    llm:
+      prompt: "Return computed expressions directly instead of assigning to unnecessary temporaries."
+  - id: "enforce-required-pointer-null-checks"
+    name: "Enforce null checks for required pointers"
+    type: llm
+    severity: warning
+    category: "security"
+    message: "For required non-null pointers, use RequiredPtr/EXTRACT_PARAM_OR_FAIL or ERR_FAIL_NULL-style guards instead of assumptions."
+    llm:
+      prompt: "For required non-null pointers, use RequiredPtr/EXTRACT_PARAM_OR_FAIL or ERR_FAIL_NULL-style guards instead of assumptions."
+  - id: "use-err-fail-guards"
+    name: "Use ERR_FAIL-style guard macros"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Use the appropriate ERR_FAIL_* guard macros for invalid preconditions and failures."
+    llm:
+      prompt: "Use the appropriate ERR_FAIL_* guard macros for invalid preconditions and failures."
+  - id: "preserve-deprecated-api-compatibility"
+    name: "Preserve deprecated API compatibility paths"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "When deprecating APIs, keep compatibility behavior and wrap deprecated registrations/paths with DISABLE_DEPRECATED guards."
+    llm:
+      prompt: "When deprecating APIs, keep compatibility behavior and wrap deprecated registrations/paths with DISABLE_DEPRECATED guards."
+  - id: "keep-core-runtime-decoupled"
+    name: "Keep core/runtime layers decoupled"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Do not add dependencies from core/runtime layers to editor or module-specific code."
+    llm:
+      prompt: "Do not add dependencies from core/runtime layers to editor or module-specific code."
+  - id: "bind-and-document-public-api-changes"
+    name: "Bind and document public API changes"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "When adding or changing public script-facing APIs, update ClassDB/property bindings and corresponding class reference docs in the same PR."
+    llm:
+      prompt: "When adding or changing public script-facing APIs, update ClassDB/property bindings and corresponding class reference docs in the same PR."
+  - id: "follow-documentation-style-guidelines"
+    name: "Follow documentation style guidelines"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Write docs in the project’s required style and schema (including required fields and formatting conventions)."
+    llm:
+      prompt: "Write docs in the project’s required style and schema (including required fields and formatting conventions)."
+  - id: "avoid-translation-churn-from-trivial-doc-edits"
+    name: "Avoid translation churn from trivial doc rewrites"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Avoid minor wording-only doc edits that invalidate translations without clear user-facing value."
+    llm:
+      prompt: "Avoid minor wording-only doc edits that invalidate translations without clear user-facing value."
+  - id: "do-not-edit-managed-translation-files-directly"
+    name: "Do not edit managed translation files directly"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Do not manually edit managed/autogenerated translation files outside the localization workflow."
+    llm:
+      prompt: "Do not manually edit managed/autogenerated translation files outside the localization workflow."
+  - id: "translation-literals-and-refresh-rules"
+    name: "Use correct translation literal and refresh behavior"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Use TTRC only for static literals and refresh dynamic translated UI text on NOTIFICATION_TRANSLATION_CHANGED."
+    llm:
+      prompt: "Use TTRC only for static literals and refresh dynamic translated UI text on NOTIFICATION_TRANSLATION_CHANGED."
+  - id: "document-platform-specific-behavior"
+    name: "Document platform-specific or caveated behavior"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "When behavior differs by platform/runtime or has important caveats/ordering constraints, explicitly document scope, limitations, and expected semantics."
+    llm:
+      prompt: "When behavior differs by platform/runtime or has important caveats/ordering constraints, explicitly document scope, limitations, and expected semantics."
+  - id: "preserve-enum-and-api-compat-values"
+    name: "Preserve compatibility of enum/API values"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Do not change existing public enum underlying values or compatibility-sensitive defaults; adjust presentation via hints/docs instead."
+    llm:
+      prompt: "Do not change existing public enum underlying values or compatibility-sensitive defaults; adjust presentation via hints/docs instead."
+  - id: "assign-shader-builtins-consistently"
+    name: "Assign required shader built-ins on all relevant paths"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "When shader built-ins control global feature behavior, assign them consistently across code paths or explicitly gate with defines."
+    llm:
+      prompt: "When shader built-ins control global feature behavior, assign them consistently across code paths or explicitly gate with defines."
+  - id: "require-cross-platform-export-sync"
+    name: "Keep desktop export changes synchronized across platforms"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "When shared desktop export behavior changes, update corresponding Linux/Windows platform export plugins in the same PR."
+    llm:
+      prompt: "When shared desktop export behavior changes, update corresponding Linux/Windows platform export plugins in the same PR."
+  - id: "use-filedialog-abstraction"
+    name: "Use FileDialog abstraction for file pickers"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Use FileDialog with native-dialog support instead of direct DisplayServer dialog calls."
+    llm:
+      prompt: "Use FileDialog with native-dialog support instead of direct DisplayServer dialog calls."
+  - id: "preserve-undo-redo-live-edit-semantics"
+    name: "Preserve undo/redo live-edit semantics"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "For editor actions affecting live-edited remote nodes, use undo/redo property operations rather than direct assignments."
+    llm:
+      prompt: "For editor actions affecting live-edited remote nodes, use undo/redo property operations rather than direct assignments."
+  - id: "separate-debugger-breakpoints-from-editor-markers"
+    name: "Keep debugger breakpoints separate from editor markers"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Do not mix non-breakpoint editor markers into breakpoint APIs/protocol paths used by debugger tooling."
+    llm:
+      prompt: "Do not mix non-breakpoint editor markers into breakpoint APIs/protocol paths used by debugger tooling."
+  - id: "use-callable-validity-correctly"
+    name: "Use Callable validity checks correctly"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Use Callable::is_valid() for callability checks rather than treating is_null() as equivalent."
+    llm:
+      prompt: "Use Callable::is_valid() for callability checks rather than treating is_null() as equivalent."
+  - id: "preserve-fallbacks-for-optimized-paths"
+    name: "Preserve fallbacks for optimized/platform paths"
+    type: llm
+    severity: warning
+    category: "performance"
+    message: "When adding platform/hardware optimizations, keep correct fallback behavior for unsupported configurations."
+    llm:
+      prompt: "When adding platform/hardware optimizations, keep correct fallback behavior for unsupported configurations."
+  - id: "keep-changed-cpp-files-clang-tidy-clean"
+    name: "Keep changed C++ files clang-tidy clean"
+    type: llm
+    severity: warning
+    category: "style"
+    message: "Ensure changed C++ files satisfy the repository’s clang-tidy checks configured in CI."
+    llm:
+      prompt: "Ensure changed C++ files satisfy the repository’s clang-tidy checks configured in CI."
+  - id: "preserve-gdextension-compatibility"
+    name: "Preserve GDExtension compatibility"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "Extension-facing API changes must remain backward compatible with supported stable tags and pass API validation checks."
+    llm:
+      prompt: "Extension-facing API changes must remain backward compatible with supported stable tags and pass API validation checks."
+  - id: "disclose-ai-assistance"
+    name: "Disclose AI-assisted contributions"
+    type: llm
+    severity: warning
+    category: "patterns"
+    message: "If AI tools were used for contribution work, disclose that usage in the PR as required by contribution guidelines."
+    llm:
+      prompt: "If AI tools were used for contribution work, disclose that usage in the PR as required by contribution guidelines."
